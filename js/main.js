@@ -1,0 +1,110 @@
+var ny = {
+	mapsAPIKey: "AIzaSyD5I8RklLfFwIeqdd49HZ8hXV6xfOwUBbM",
+	getAddr: function(address) {
+		return 	$.getJSON("https:///maps.googleapis.com/maps/api/geocode/json?address=" +
+			encodeURIComponent(address) + ",+New+York,+NY&key=" + ny.mapsAPIKey);
+	}
+};
+
+function initialize() {
+  var mapOptions = {
+	    center: new google.maps.LatLng(26.332807,-322),
+	    zoom: 1,
+	    zoomControl: true,
+	    zoomControlOptions: {
+	      style: google.maps.ZoomControlStyle.SMALL,
+	    },
+	    disableDoubleClickZoom: true,
+	    mapTypeControl: false,
+	    mapTypeControlOptions: {
+	      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+	    },
+	    scaleControl: true,
+	    scrollwheel: true,
+	    streetViewControl: false,
+	    draggable : true,
+	    overviewMapControl: true,
+	    overviewMapControlOptions: {
+	      opened: false,
+	    },
+	    mapTypeId: google.maps.MapTypeId.ROADMAP,
+			styles: [
+   {
+      "stylers":[
+         {
+            "visibility":"off"
+         }
+      ]
+   },
+   {
+      "featureType":"water",
+      "stylers":[
+         {
+            "visibility":"simplified"
+         },
+         {
+            "color":"#ffffff"
+         }
+      ]
+   },
+   {
+      "featureType":"landscape",
+      "stylers":[
+         {
+            "visibility":"on"
+         },
+         {
+            "color":"#d2e3e6"
+         }
+      ]
+   },
+   {
+      "featureType":"administrative.country",
+      "elementType":"geometry",
+      "stylers":[
+         {
+            "visibility":"on"
+         },
+         {
+            "color":"#ffffff"
+         },
+         {
+            "weight":1.5
+         }
+      ]
+   },
+   {
+      "color":"#ffffff"
+   }
+],
+	  };
+var map = new google.maps.Map(document.getElementById("map-canvas"),
+    mapOptions);
+    
+var sw = new google.maps.LatLng(-90 ,-180),
+	ne = new google.maps.LatLng(90 ,180),
+	bounds = new google.maps.LatLngBounds(sw, ne);
+	
+	//map.fitBounds(bounds);
+
+ny.map = map;
+}
+
+$(function(){
+	initialize();
+	$(".map-entry").each(function(){
+		var address = $(this).data("address"),
+			title = $(this).data("title")
+		ny.getAddr(address).done(function(data){
+			var marker = new google.maps.Marker(
+				{
+	    			position: data.results[0].geometry.location,
+	    			map: ny.map,
+	    			title: title
+				});	
+	});
+
+	//	alert(data.toString());
+	});
+});
+//google.maps.event.addDomListener(window, 'load', initialize);
