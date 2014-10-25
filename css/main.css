@@ -4,7 +4,10 @@
    Author's custom styles
    ========================================================================== */
    
-#map-canvas { height: 450px; }   
+#map-canvas {
+	height: 450px;
+	max-width: 940px;
+}   
 
 
 
