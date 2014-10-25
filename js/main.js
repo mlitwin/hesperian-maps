@@ -91,18 +91,31 @@ ny.map = map;
 }
 
 $(function(){
-	var i, p, loc, marker;
+	var i, p, loc, marker, infowindow;
 	
 	initialize();
 	for( i = 0; i < HM.partners.length; i++) {
 		p = HM.partners[i];
 		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
-		var marker = new google.maps.Marker(
+		marker = new google.maps.Marker(
 				{
 	    			position: loc,
 	    			map: ny.map,
 	    			title: p.title
 				});	
+				
+		infowindow = new google.maps.InfoWindow({
+			content: HM.partnerHTML( p),
+			maxWidth: 300,
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+//		  if (openInfowindow) {
+//			  openInfowindow.close();
+//		  }
+      	  infowindow.open(marker.getMap('map'), marker);
+//      openInfowindow = infowindow;
+		});
 		
 	}
 });
