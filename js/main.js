@@ -91,20 +91,19 @@ ny.map = map;
 }
 
 $(function(){
+	var i, p, loc, marker;
+	
 	initialize();
-	$(".map-entry").each(function(){
-		var address = $(this).data("address"),
-			title = $(this).data("title")
-		ny.getAddr(address).done(function(data){
-			var marker = new google.maps.Marker(
+	for( i = 0; i < HM.partners.length; i++) {
+		p = HM.partners[i];
+		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
+		var marker = new google.maps.Marker(
 				{
-	    			position: data.results[0].geometry.location,
+	    			position: loc,
 	    			map: ny.map,
-	    			title: title
+	    			title: p.title
 				});	
-	});
-
-	//	alert(data.toString());
-	});
+		
+	}
 });
 //google.maps.event.addDomListener(window, 'load', initialize);
