@@ -9,7 +9,7 @@ var ny = {
 function initialize() {
   var mapOptions = {
 	    center: new google.maps.LatLng(26.332807,-322),
-	    zoom: 1,
+	    zoom: 2,
 	    zoomControl: true,
 	    zoomControlOptions: {
 	      style: google.maps.ZoomControlStyle.SMALL,
