@@ -92,18 +92,23 @@ HM.partners = [
 		title: "'Lotos' Disability Awareness and Learning Center (DALC)",
 		location: "Azerbaijan",
 		latlng: [40.428708, 47.852481]
-	}
+	},
+	{
+		title: "99 Balloons /TEAM Ukraine",
+		location: "US",
+		latlng: [36.066975, -94.157049]
+	}	
 ];
 
 
 $(function(){
-	var i, p, loc, marker, infowindow, map;
+	var i, map, openInfowindow;
 	
 	map = new google.maps.Map(document.getElementById("map-canvas"), HM.mapOptions);
 	
-	//initialize();
-	for( i = 0; i < HM.partners.length; i++) {
-		p = HM.partners[i];
+	function createMarker(p) {
+		var loc, infowindow, marker;
+		
 		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
 		marker = new google.maps.Marker(
 				{
@@ -118,13 +123,16 @@ $(function(){
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {
-//		  if (openInfowindow) {
-//			  openInfowindow.close();
-//		  }
+		  if (openInfowindow) {
+			openInfowindow.close();
+		  }
       	  infowindow.open(marker.getMap('map'), marker);
-//      openInfowindow = infowindow;
+		  openInfowindow = infowindow;
 		});
-		
+	}
+	
+	for( i = 0; i < HM.partners.length; i++) {
+		createMarker(HM.partners[i]);
 	}
 });
 //google.maps.event.addDomListener(window, 'load', initialize);
