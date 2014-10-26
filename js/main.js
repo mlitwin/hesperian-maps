@@ -112,6 +112,7 @@ $(function(){
 		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
 		marker = new google.maps.Marker(
 				{
+					icon: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",
 	    			position: loc,
 	    			map: map,
 	    			title: p.title
