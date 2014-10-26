@@ -50,7 +50,7 @@ var HM = {
 					"visibility":"simplified"
 				 },
 				 {
-					"color":"#ffffff"
+					"color":"#AFD2E3"
 				 }
 			  ]
 		   },
@@ -61,7 +61,7 @@ var HM = {
 					"visibility":"on"
 				 },
 				 {
-					"color":"#d2e3e6"
+					"color":"#C8F2C4"
 				 }
 			  ]
 		   },
@@ -73,7 +73,7 @@ var HM = {
 					"visibility":"on"
 				 },
 				 {
-					"color":"#ffffff"
+					"color":"#AAAAAA"
 				 },
 				 {
 					"weight":1.5
