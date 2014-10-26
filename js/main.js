@@ -61,7 +61,7 @@ var HM = {
 					"visibility":"on"
 				 },
 				 {
-					"color":"#4E8FA0"
+					"color":"#3F7C8F"
 				 }
 			  ]
 		   },
