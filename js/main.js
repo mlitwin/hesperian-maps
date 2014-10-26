@@ -1,13 +1,20 @@
-var ny = {
-	mapsAPIKey: "AIzaSyD5I8RklLfFwIeqdd49HZ8hXV6xfOwUBbM",
-	getAddr: function(address) {
-		return 	$.getJSON("https:///maps.googleapis.com/maps/api/geocode/json?address=" +
-			encodeURIComponent(address) + ",+New+York,+NY&key=" + ny.mapsAPIKey);
-	}
-};
+var HM = {
 
-function initialize() {
-  var mapOptions = {
+	escapeHtml: function(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+	},
+    partnerHTML:function(p) {
+ 	  var html = '<div class="hmap-info">';
+  	  html += HM.escapeHtml(p.title);
+ 	  html += "</div";
+ 	  return html;
+	},
+	mapOptions: {
 	    center: new google.maps.LatLng(26.332807,-322),
 	    zoom: 2,
 	    zoomControl: true,
@@ -28,79 +35,80 @@ function initialize() {
 	      opened: false,
 	    },
 	    mapTypeId: google.maps.MapTypeId.ROADMAP,
-			styles: [
-   {
-      "stylers":[
-         {
-            "visibility":"off"
-         }
-      ]
-   },
-   {
-      "featureType":"water",
-      "stylers":[
-         {
-            "visibility":"simplified"
-         },
-         {
-            "color":"#ffffff"
-         }
-      ]
-   },
-   {
-      "featureType":"landscape",
-      "stylers":[
-         {
-            "visibility":"on"
-         },
-         {
-            "color":"#d2e3e6"
-         }
-      ]
-   },
-   {
-      "featureType":"administrative.country",
-      "elementType":"geometry",
-      "stylers":[
-         {
-            "visibility":"on"
-         },
-         {
-            "color":"#ffffff"
-         },
-         {
-            "weight":1.5
-         }
-      ]
-   },
-   {
-      "color":"#ffffff"
-   }
-],
-	  };
-var map = new google.maps.Map(document.getElementById("map-canvas"),
-    mapOptions);
-    
-var sw = new google.maps.LatLng(-90 ,-180),
-	ne = new google.maps.LatLng(90 ,180),
-	bounds = new google.maps.LatLngBounds(sw, ne);
-	
-	//map.fitBounds(bounds);
+		styles: [
+		   {
+			  "stylers":[
+				 {
+					"visibility":"off"
+				 }
+			  ]
+		   },
+		   {
+			  "featureType":"water",
+			  "stylers":[
+				 {
+					"visibility":"simplified"
+				 },
+				 {
+					"color":"#ffffff"
+				 }
+			  ]
+		   },
+		   {
+			  "featureType":"landscape",
+			  "stylers":[
+				 {
+					"visibility":"on"
+				 },
+				 {
+					"color":"#d2e3e6"
+				 }
+			  ]
+		   },
+		   {
+			  "featureType":"administrative.country",
+			  "elementType":"geometry",
+			  "stylers":[
+				 {
+					"visibility":"on"
+				 },
+				 {
+					"color":"#ffffff"
+				 },
+				 {
+					"weight":1.5
+				 }
+			  ]
+		   },
+		   {
+			  "color":"#ffffff"
+		   }
+		]
+	}
+};
 
-ny.map = map;
-}
+HM.partners = [
+	{
+		title: "'Lotos' Disability Awareness and Learning Center (DALC)",
+		location: "Azerbaijan",
+		latlng: [40.428708, 47.852481]
+	}
+];
+
 
 $(function(){
-	var i, p, loc, marker, infowindow;
+	var i, p, loc, marker, infowindow, map;
 	
-	initialize();
+	map = new google.maps.Map(document.getElementById("map-canvas"), HM.mapOptions);
+	
+	//initialize();
 	for( i = 0; i < HM.partners.length; i++) {
 		p = HM.partners[i];
 		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
 		marker = new google.maps.Marker(
 				{
 	    			position: loc,
-	    			map: ny.map,
+	    			map: map,
 	    			title: p.title
 				});	
 				
