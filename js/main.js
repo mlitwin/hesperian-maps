@@ -15,7 +15,7 @@ var HM = {
  	  return html;
 	},
 	mapOptions: {
-	    center: new google.maps.LatLng(26.332807,-322),
+	    center: new google.maps.LatLng(45,-362),
 	    zoom: 2,
 	    zoomControl: true,
 	    zoomControlOptions: {
@@ -61,7 +61,7 @@ var HM = {
 					"visibility":"on"
 				 },
 				 {
-					"color":"#3F7C8F"
+					"color":"#4C8F9E"
 				 }
 			  ]
 		   },
