@@ -35,7 +35,7 @@ var HM = {
 	    overviewMapControlOptions: {
 	      opened: false,
 	    },
-	    mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    mapTypeId: google.maps.MapTypeId.TERRAIN,
 		styles: [
 		   {
 			  "stylers":[
