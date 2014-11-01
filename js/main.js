@@ -1,7 +1,7 @@
 HM.getPartnersJSON = $.Deferred().resolve(HM.partners);
 
 $(function(){
-	var i, map, openInfowindow;
+	var i, map;
 	
 	map = new google.maps.Map(document.getElementById("map-canvas"), HM.mapOptions);
 	
@@ -32,9 +32,13 @@ $(function(){
 	}
 	
 	HM.getPartnersJSON.then(function(partners) {
-		for( i = 0; i < partners.length; i++) {
-			createMarker(partners[i]);
-		}
+		HM.createPartners(map, partners);
 	});
+	
+	/*
+	$.ajax("allpartners.json").then(function(partners) {
+		HM.createMarkersFromJSON(map, partners);
+	});
+	*/
 });
 
