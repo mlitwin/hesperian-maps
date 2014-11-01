@@ -1,13 +1,13 @@
-HM.getPartnersJSON = $.Deferred().resolve(HM.partners);
+HMap.getPartnersJSON = $.Deferred().resolve(HMap.partners);
 
 $(function(){
 	var i, map;
 	
-	map = new google.maps.Map(document.getElementById("map-canvas"), HM.mapOptions);
+	map = new google.maps.Map(document.getElementById("map-canvas"), HMap.mapOptions);
 	
 	
-	HM.getPartnersJSON.then(function(partners) {
-		HM.createPartners(map, partners);
+	HMap.getPartnersJSON.then(function(partners) {
+		HMap.createPartners(map, partners);
 	});
 	
 	/*

@@ -1,6 +1,6 @@
 
 
-HM.partners = [
+HMap.partners = [
 	{
 		title: "'Lotos' Disability Awareness and Learning Center (DALC)",
 		url: "http://www.hesperian.org",

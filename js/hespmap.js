@@ -2,7 +2,7 @@
 
 var openInfowindow;
 
-var HM = {
+var HMap = {
 
 	escapeHtml: function(unsafe) {
     return unsafe
@@ -15,11 +15,11 @@ var HM = {
     partnerHTML:function(p) {
  	  var html = '<div class="hmap-info">';
  	  if( p.url) {
- 	  	  html += "<a href='" + HM.escapeHtml(p.url) + "'>";
-  	  	  html += HM.escapeHtml(p.title);
+ 	  	  html += "<a href='" + HMap.escapeHtml(p.url) + "'>";
+  	  	  html += HMap.escapeHtml(p.title);
   	  	  html += "</a>";
  	  } else {
-    	  html += HM.escapeHtml(p.title);
+    	  html += HMap.escapeHtml(p.title);
  	  }
  
  	  html += "</div>";
@@ -38,10 +38,10 @@ var HM = {
 		var loc, infowindow, marker;
 		
 		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
-		marker = new google.maps.Marker(HM.markerSpec(map, p));	
+		marker = new google.maps.Marker(HMap.markerSpec(map, p));	
 				
 		infowindow = new google.maps.InfoWindow({
-			content: HM.partnerHTML( p),
+			content: HMap.partnerHTML( p),
 			maxWidth: 300,
 		});
 
@@ -56,7 +56,7 @@ var HM = {
 	createPartners: function(map, json) {
 		var i;
 		for(i = 0; i < json.length; i++) {
-		  HM.createMarker(map, json[i]);
+		  HMap.createMarker(map, json[i]);
 		}
 	},
 	mapOptions: {
@@ -133,6 +133,6 @@ var HM = {
 	}
 };
 
-window.HM = HM;
+window.HMap = HMap;
 })();
 
