@@ -1,11 +1,31 @@
 (function() {
 
-var partnerHandlebars = '\
-<div class="hmap-info">\
- <a href="{{url}}" target="_blank">{{title}}</a>\
-</div>';
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
 
-var partnerTemplate = Handlebars.compile(partnerHandlebars);
+function escapeHtml(string) {
+	return String(string).replace(/[&<>"'\/]/g, function (s) {
+	  return entityMap[s];
+	});
+}
+
+function partnerTemplate(p) {
+  var html = '<div class="hmap-info">';
+  if( p.url) {
+  	html += '<a href="' + escapeHtml(p.url) + '" target="_blank">' + escapeHtml(p.title) + '</a>';
+  } else {
+  	html += escapeHtml(p.title);
+  }
+  
+  html += '</div>';
+  return html;
+}
 
 
 var mapOptions = {
@@ -98,19 +118,12 @@ var partners = [
 	},
 	{
 		title: "99 Balloons /TEAM Ukraine",
-		url: "http://www.hesperian.org",
 		location: "US",
 		latlng: [36.066975, -94.157049]
 	}	
 ];
   	
   	map.addPartners(partners);
-/*
-	/*
-	$.ajax("allpartners.json").then(function(partners) {
-		HM.createMarkersFromJSON(map, partners);
-	});
-	*/
 });	
 
 
