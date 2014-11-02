@@ -10,7 +10,7 @@
  *   defaultIcon: (optional) uri for partner marker icon, if not specified in JSON.
  * 
  */
-(function() {
+(function(maps) {
 
 var openInfowindow;
 
@@ -19,7 +19,7 @@ var HMap = {
       return this._options.partnerTemplate(p);
 	},
 	markerSpec: function(p) {
-		var loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]),
+		var loc = new maps.LatLng( p.latlng[0], p.latlng[1]),
 			icon = p.icon || this.defaultIcon;
 		return {
 					icon: icon,
@@ -31,15 +31,15 @@ var HMap = {
 	createMarker: function (p) {
 		var loc, infowindow, marker;
 		
-		loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
-		marker = new google.maps.Marker(this.markerSpec(p));	
+		loc = new maps.LatLng( p.latlng[0], p.latlng[1]);
+		marker = new maps.Marker(this.markerSpec(p));	
 				
-		infowindow = new google.maps.InfoWindow({
+		infowindow = new maps.InfoWindow({
 			content: this.partnerHTML( p),
 			maxWidth: 300,
 		});
 
-		google.maps.event.addListener(marker, 'click', function() {
+		maps.event.addListener(marker, 'click', function() {
 		  if (openInfowindow) {
 			openInfowindow.close();
 		  }
@@ -59,10 +59,10 @@ function HMapFunc(mapDom, options) {
   this._mapDom = mapDom;
   this._options = options;
   this.defaultIcon = options.defaultIcon || "http://maps.google.com/mapfiles/kml/pal4/icon49.png";
-  this.map = new google.maps.Map(mapDom, this._options.mapOptions);
+  this.map = new maps.Map(mapDom, this._options.mapOptions);
 }
 
 HMapFunc.prototype = HMap;
 
 window.HMap = HMapFunc;
-})();
+})(google.maps);
