@@ -1,23 +1,15 @@
 (function() {
 
 var openInfowindow,
-  partnerHandlebars = '<div class="hmap-info">\
-<a href="{{url}}">{{title}}</a>\
+  partnerHandlebars = '\
+<div class="hmap-info">\
+ <a href="{{url}}" target="_blank">{{title}}</a>\
 </div>';
 
 var partnerTemplate = Handlebars.compile(partnerHandlebars);
 
 
 var HMap = {
-
-	escapeHtml: function(unsafe) {
-    return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
-	},
     partnerHTML: function(p) {
       return partnerTemplate(p);
 	},
