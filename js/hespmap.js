@@ -1,6 +1,12 @@
 (function() {
 
-var openInfowindow;
+var openInfowindow,
+  partnerHandlebars = '<div class="hmap-info">\
+<a href="{{url}}">{{title}}</a>\
+</div>';
+
+var partnerTemplate = Handlebars.compile(partnerHandlebars);
+
 
 var HMap = {
 
@@ -12,18 +18,8 @@ var HMap = {
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
 	},
-    partnerHTML:function(p) {
- 	  var html = '<div class="hmap-info">';
- 	  if( p.url) {
- 	  	  html += "<a href='" + HMap.escapeHtml(p.url) + "'>";
-  	  	  html += HMap.escapeHtml(p.title);
-  	  	  html += "</a>";
- 	  } else {
-    	  html += HMap.escapeHtml(p.title);
- 	  }
- 
- 	  html += "</div>";
- 	  return html;
+    partnerHTML: function(p) {
+      return partnerTemplate(p);
 	},
 	markerSpec: function(map, p) {
 		var loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
