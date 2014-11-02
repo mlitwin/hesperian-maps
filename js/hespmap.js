@@ -8,9 +8,10 @@ var HMap = {
       return this._options.partnerTemplate(p);
 	},
 	markerSpec: function(p) {
-		var loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
+		var loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]),
+			icon = p.icon || this.defaultIcon;
 		return {
-					icon: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",
+					icon: icon,
 	    			position: loc,
 	    			map: this.map,
 	    			title: p.title
@@ -52,6 +53,7 @@ var HMap = {
 function HMapFunc(mapDom, options) {
   this._mapDom = mapDom;
   this._options = options;
+  this.defaultIcon = options.defaultIcon || "http://maps.google.com/mapfiles/kml/pal4/icon49.png";
   this.map = new google.maps.Map(mapDom, this._options.mapOptions);
 }
 
