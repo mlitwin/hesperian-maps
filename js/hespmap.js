@@ -1,17 +1,11 @@
+// HMap class - handles map creation and manipulation
 (function() {
 
-var openInfowindow,
-  partnerHandlebars = '\
-<div class="hmap-info">\
- <a href="{{url}}" target="_blank">{{title}}</a>\
-</div>';
-
-var partnerTemplate = Handlebars.compile(partnerHandlebars);
-
+var openInfowindow;
 
 var HMap = {
     partnerHTML: function(p) {
-      return partnerTemplate(p);
+      return this._options.partnerTemplate(p);
 	},
 	markerSpec: function(p) {
 		var loc = new google.maps.LatLng( p.latlng[0], p.latlng[1]);
@@ -52,89 +46,16 @@ var HMap = {
 		for(i = 0; i < json.length; i++) {
 		  this.createMarker(json[i]);
 		}
-	},
-	mapOptions: {
-	    center: new google.maps.LatLng(45,-362),
-	    zoom: 2,
-	    minZoom: 2,
-	    zoomControl: true,
-	    zoomControlOptions: {
-	      style: google.maps.ZoomControlStyle.SMALL,
-	    },
-	    disableDoubleClickZoom: true,
-	    mapTypeControl: false,
-	    mapTypeControlOptions: {
-	      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-	    },
-	    scaleControl: true,
-	    scrollwheel: true,
-	    streetViewControl: false,
-	    draggable : true,
-	    overviewMapControl: true,
-	    overviewMapControlOptions: {
-	      opened: false,
-	    },
-	    mapTypeId: google.maps.MapTypeId.TERRAIN,
-		styles: [
-		   {
-			  "stylers":[
-				 {
-					"visibility":"off"
-				 }
-			  ]
-		   },
-		   {
-			  "featureType":"water",
-			  "stylers":[
-				 {
-					"visibility":"simplified"
-				 },
-				 {
-					"color":"#FAE8AA"
-				 }
-			  ]
-		   },
-		   {
-			  "featureType":"landscape",
-			  "stylers":[
-				 {
-					"visibility":"on"
-				 },
-				 {
-					"color":"#4C8F9E"
-				 }
-			  ]
-		   },
-		   {
-			  "featureType":"administrative.country",
-			  "elementType":"geometry",
-			  "stylers":[
-				 {
-					"visibility":"on"
-				 },
-				 {
-					"color":"#AAAAAA"
-				 },
-				 {
-					"weight":1.5
-				 }
-			  ]
-		   },
-		   {
-			  "color":"#ffffff"
-		   }
-		]
 	}
 };
 
 function HMapFunc(mapDom, options) {
   this._mapDom = mapDom;
   this._options = options;
-  this.map = new google.maps.Map(mapDom, HMap.mapOptions);
+  this.map = new google.maps.Map(mapDom, this._options.mapOptions);
 }
 
 HMapFunc.prototype = HMap;
 
 window.HMap = HMapFunc;
 })();
-
