@@ -1,4 +1,15 @@
-// HMap class - handles map creation and manipulation
+/* HMap class - handles map creation and manipulation
+ *
+ * Usage: var map = new HMap(domElement, options);
+ * map.addPartners(jsonArray);
+ *
+ * domElement = DOM to attach map to.
+ * options:
+ *   partnerTemplate: (required) function(p) returning HTML for info window for partner
+ *   mapOptions: (required) google map creation options.
+ *   defaultIcon: (optional) uri for partner marker icon, if not specified in JSON.
+ * 
+ */
 (function() {
 
 var openInfowindow;
@@ -40,12 +51,6 @@ var HMap = {
 		var i;
 		for(i = 0; i < partnerArray.length; i++) {
 			this.createMarker(partnerArray[i]);
-		}
-	},
-	createPartners: function(map, json) {
-		var i;
-		for(i = 0; i < json.length; i++) {
-		  this.createMarker(json[i]);
 		}
 	}
 };
